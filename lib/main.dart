@@ -1,13 +1,16 @@
-import 'package:dashboard_admin/ui/layouts/dashboard/dashboard_layout.dart';
-import 'package:dashboard_admin/ui/layouts/splash/splash_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:dashboard_admin/providers/auth_provider.dart';
+import 'package:dashboard_admin/providers/sidemenu_provider.dart';
+
 import 'package:dashboard_admin/router/router.dart';
 import 'package:dashboard_admin/services/navigation_service.dart';
 import 'package:dashboard_admin/services/local_storage.dart';
+
 import 'package:dashboard_admin/ui/layouts/auth/auth_layout.dart';
+import 'package:dashboard_admin/ui/layouts/dashboard/dashboard_layout.dart';
+import 'package:dashboard_admin/ui/layouts/splash/splash_layout.dart';
 
 void main() async {
   //configuración del localStorage necesario que sea de tipo async y await
@@ -24,7 +27,8 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(lazy: false, create: (_) => AuthProvider())
+        ChangeNotifierProvider(lazy: false, create: (_) => AuthProvider()),
+        ChangeNotifierProvider(lazy: false, create: (_) => SideMenuProvider())
       ],
       child: const MyApp(),
     );

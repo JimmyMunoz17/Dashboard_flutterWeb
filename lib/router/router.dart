@@ -16,6 +16,8 @@ class Flurorouter {
 
   //Dashboard
   static String dashboardRoute = '/dashboard';
+  static String dashboardIconsRoute = '/dashboard/icons';
+  static String dashboardBlackRoute = '/dashboard/black';
 
   static void configureRoute() {
     //Ruta inicial /
@@ -30,6 +32,12 @@ class Flurorouter {
     //Ruta Dashboard routes
     router.define(dashboardRoute,
         handler: DashboardHandlers.dashboard,
+        transitionType: TransitionType.fadeIn);
+    router.define(dashboardIconsRoute,
+        handler: DashboardHandlers.icons,
+        transitionType: TransitionType.fadeIn);
+    router.define(dashboardBlackRoute,
+        handler: DashboardHandlers.blackview,
         transitionType: TransitionType.fadeIn);
     //Ruta 404
     router.notFoundHandler = NoPageFoundHandlers.noPageFound;

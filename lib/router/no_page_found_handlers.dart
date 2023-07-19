@@ -1,4 +1,6 @@
+import 'package:dashboard_admin/providers/sidemenu_provider.dart';
 import 'package:fluro/fluro.dart';
+import 'package:provider/provider.dart';
 
 import '../ui/views/no_page_found_view.dart';
 
@@ -6,6 +8,9 @@ import '../ui/views/no_page_found_view.dart';
 class NoPageFoundHandlers {
   //404
   static Handler noPageFound = Handler(handlerFunc: (context, parameters) {
+    Provider.of<SideMenuProvider>(context!, listen: false)
+        .setCurrentPageUrl('/404');
+
     return const NoPageFoundView();
   });
 }
