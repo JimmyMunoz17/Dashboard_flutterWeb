@@ -1,10 +1,12 @@
-import 'package:dashboard_admin/providers/register_form_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:provider/provider.dart';
+
+import 'package:dashboard_admin/providers/auth_provider.dart';
+import 'package:dashboard_admin/providers/register_form_provider.dart';
 
 import 'package:dashboard_admin/router/router.dart';
-import 'package:provider/provider.dart';
 
 import '../widgets/Inputs/custom_inputs.dart';
 import '../widgets/buttons/custom_button.dart';
@@ -173,8 +175,18 @@ class RegisterView extends StatelessWidget {
                                 colorButton:
                                     const Color.fromRGBO(0, 133, 255, 1),
                                 bordeRadius: 10,
-                                onPressed: () =>
-                                    registerformProvider.validatorRegistro()),
+                                onPressed: () {
+                                  final validForm =
+                                      registerformProvider.validatorRegistro();
+                                  if (!validForm) return;
+                                  final authProvider =
+                                      Provider.of<AuthProvider>(context,
+                                          listen: false);
+                                  authProvider.register(
+                                      registerformProvider.emailRegister,
+                                      registerformProvider.passwordRegister,
+                                      registerformProvider.nameRegister);
+                                }),
                             const SizedBox(
                               height: 15,
                             ),

@@ -5,16 +5,21 @@ import 'package:dashboard_admin/providers/auth_provider.dart';
 import 'package:dashboard_admin/providers/sidemenu_provider.dart';
 
 import 'package:dashboard_admin/router/router.dart';
-import 'package:dashboard_admin/services/navigation_service.dart';
 import 'package:dashboard_admin/services/local_storage.dart';
+import 'package:dashboard_admin/services/navigation_service.dart';
+import 'package:dashboard_admin/services/notifications_service.dart';
 
 import 'package:dashboard_admin/ui/layouts/auth/auth_layout.dart';
 import 'package:dashboard_admin/ui/layouts/dashboard/dashboard_layout.dart';
 import 'package:dashboard_admin/ui/layouts/splash/splash_layout.dart';
 
+import 'package:dashboard_admin/api/cafe_api.dart';
+
 void main() async {
   //configuración del localStorage necesario que sea de tipo async y await
   await LocalStorage.configurePrefs();
+  //configuración de la API
+  CafeApi.configureDio();
   //Configuración del Route
   Flurorouter.configureRoute();
   runApp(const AppState());
@@ -47,6 +52,9 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: Flurorouter.router.generator,
       //Controlador de Navegación
       navigatorKey: NavigationService.navigatorkey,
+      //configuración del snackbar
+      scaffoldMessengerKey: NotificationsService.messengerKey,
+
       //Configuración del Layout inicial solo recibe widgets
       builder: (_, child) {
         // print(LocalStorage.prefs.getString('token'));//acceso al token

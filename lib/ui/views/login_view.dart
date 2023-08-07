@@ -23,13 +23,13 @@ class LoginView extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => LoginFormProvider(),
       child: Builder(builder: (context) {
-        final loginFromProvider =
+        final loginFormProvider =
             Provider.of<LoginFormProvider>(context, listen: false);
         return ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 370),
           child: Form(
               // se da el acceso al provider a todo el formulario
-              key: loginFromProvider.formKey,
+              key: loginFormProvider.formKey,
               autovalidateMode: AutovalidateMode.always,
               child: Container(
                   margin:
@@ -77,6 +77,8 @@ class LoginView extends StatelessWidget {
                             height: 20,
                           ),
                           TextFormField(
+                            onFieldSubmitted: (_) =>
+                                onFormSubmit(loginFormProvider, authProvider),
                             validator: (value) {
                               if (!EmailValidator.validate(value ?? '')) {
                                 return 'Email no válido';
@@ -86,7 +88,7 @@ class LoginView extends StatelessWidget {
                             keyboardType: TextInputType.emailAddress,
                             //Obtiene el valor del input
                             onChanged: (value) =>
-                                loginFromProvider.emailLogin = value,
+                                loginFormProvider.emailLogin = value,
                             style: const TextStyle(color: Colors.black),
                             decoration: CustomInputs.loginInputDecoration(
                                 hint: 'Ingrese su correo',
@@ -97,6 +99,8 @@ class LoginView extends StatelessWidget {
                             height: 10,
                           ),
                           TextFormField(
+                            onFieldSubmitted: (_) =>
+                                onFormSubmit(loginFormProvider, authProvider),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Ingrese su contraseña';
@@ -109,7 +113,7 @@ class LoginView extends StatelessWidget {
                             keyboardType: TextInputType.visiblePassword,
                             //Obtiene el valor del input
                             onChanged: (value) =>
-                                loginFromProvider.passwordLogin = value,
+                                loginFormProvider.passwordLogin = value,
                             obscureText: true,
                             style: const TextStyle(color: Colors.black),
                             decoration: CustomInputs.loginInputDecoration(
@@ -134,15 +138,8 @@ class LoginView extends StatelessWidget {
                               ),
                               colorButton: const Color.fromRGBO(0, 133, 255, 1),
                               bordeRadius: 10,
-                              onPressed: () {
-                                bool isValid =
-                                    loginFromProvider.validatorLogin();
-                                if (isValid) {
-                                  authProvider.login(
-                                      loginFromProvider.emailLogin,
-                                      loginFromProvider.passwordLogin);
-                                }
-                              })
+                              onPressed: () =>
+                                  onFormSubmit(loginFormProvider, authProvider))
                         ],
                       ),
                     ),
@@ -150,5 +147,14 @@ class LoginView extends StatelessWidget {
         );
       }),
     );
+  }
+
+  void onFormSubmit(
+      LoginFormProvider loginFormProvider, AuthProvider authProvider) {
+    bool isValid = loginFormProvider.validatorLogin();
+    if (isValid) {
+      authProvider.login(
+          loginFormProvider.emailLogin, loginFormProvider.passwordLogin);
+    }
   }
 }

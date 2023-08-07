@@ -1,7 +1,13 @@
-import 'package:dashboard_admin/router/router.dart';
-import 'package:dashboard_admin/services/navigation_service.dart';
 import 'package:flutter/material.dart';
+
+import 'package:dashboard_admin/router/router.dart';
+
+import 'package:dashboard_admin/api/cafe_api.dart';
+import 'package:dashboard_admin/models/http/auth_response.dart';
+
 import 'package:dashboard_admin/services/local_storage.dart';
+import 'package:dashboard_admin/services/navigation_service.dart';
+import 'package:dashboard_admin/services/notifications_service.dart';
 
 //Estado de la autenticación
 enum AuthStatus { checking, authenticated, notAuthenticated }
@@ -9,20 +15,32 @@ enum AuthStatus { checking, authenticated, notAuthenticated }
 class AuthProvider extends ChangeNotifier {
   String? _token;
   AuthStatus authStatus = AuthStatus.checking;
+  Usuario? user;
 
   AuthProvider() {
     isAuthenticated();
   }
 
   login(String email, String password) {
-    //Todo completar petición HTTP
-    _token = 'envioTokenEjemplo';
-    LocalStorage.prefs.setString('token', _token!);
-
-    //Navegación al dashboard
-    authStatus = AuthStatus.authenticated;
-    notifyListeners(); // redibujar
-    NavigationService.replaceTo(Flurorouter.dashboardRoute);
+    final data = {'correo': email, 'password': password};
+    //conexión con la API
+    CafeApi.httpPost('/auth/login', data).then((json) {
+      print(json);
+      final authResponse = AuthResponse.fromMap(json);
+      user = authResponse.usuario;
+      //Autenticación de login y navegación dashboard
+      //Navegación al dashboard si esta autenticado
+      authStatus = AuthStatus.authenticated;
+      //Revisión del token
+      LocalStorage.prefs.setString('token', authResponse.token);
+      NavigationService.replaceTo(Flurorouter.dashboardRoute);
+      //configuración API Y solo usen ese JWT
+      CafeApi.configureDio();
+      notifyListeners(); // redibujar
+    }).catchError((e) {
+      print('Error en: $e');
+      NotificationsService.showSnackbarError('Credenciales invalidas');
+    });
   }
 
   //Validación del token autenticación
@@ -33,12 +51,55 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       return false;
     }
-
     //TODO: COMPROBACIÓN DEL JWT VÁLIDO
+    try {
+      final response = await CafeApi.httpGet('/auth');
+      final authResponse = AuthResponse.fromMap(response);
+      //Validación de un token por 2 semanas de conexión
+      LocalStorage.prefs.setString('token', authResponse.token);
+      user = authResponse.usuario;
+      authStatus = AuthStatus.authenticated;
+      notifyListeners();
+      return true;
+    } catch (e) {
+      //si no esta autenticado
+      print(e);
+      authStatus = AuthStatus.notAuthenticated;
+      notifyListeners();
+      return false;
+    }
+  }
 
-    Future.delayed(const Duration(milliseconds: 1000));
-    authStatus = AuthStatus.authenticated;
+  register(String email, String password, String name) {
+    //envío de la información map
+    final data = {
+      'nombre': name,
+      'correo': email,
+      'password': password,
+    };
+    //conexión con la API
+    CafeApi.httpPost('/usuarios', data).then((json) {
+      print(json);
+      final authResponse = AuthResponse.fromMap(json);
+      user = authResponse.usuario;
+      //Navegación al dashboard y autenticación de registro
+      authStatus = AuthStatus.authenticated;
+      LocalStorage.prefs.setString('token', authResponse.token);
+      NavigationService.replaceTo(Flurorouter.dashboardRoute);
+      NotificationsService.showSnackbarOk('Registro satisfactorio');
+      //configuración API Y solo usen ese JWT
+      CafeApi.configureDio();
+      notifyListeners(); // redibujar
+    }).catchError((e) {
+      print('Error en: $e');
+      NotificationsService.showSnackbarError('Credenciales invalidas');
+    });
+  }
+
+  //TODO: logout
+  logout() {
+    LocalStorage.prefs.remove('token');
+    authStatus = AuthStatus.notAuthenticated;
     notifyListeners();
-    return true;
   }
 }
