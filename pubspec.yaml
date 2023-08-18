@@ -31,6 +31,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   dio: ^5.3.0
   email_validator: ^2.1.17
+  file_picker: ^5.3.3
   fluro: ^2.0.5
   flutter:
     sdk: flutter
@@ -54,9 +55,10 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
 assets:
-  - gif/icon_auth.gif
-  - img/sign_in.png
-  - img/sign_up.png
+  - assets/
+  # - gif/icon_auth.gif
+  # - img/sign_in.png
+  # - img/sign_up.png
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

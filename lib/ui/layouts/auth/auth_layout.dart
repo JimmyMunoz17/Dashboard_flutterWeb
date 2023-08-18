@@ -1,13 +1,13 @@
+import 'package:flutter/material.dart';
+
 import 'package:dashboard_admin/ui/layouts/auth/widgets/custom_background_page.dart';
 import 'package:dashboard_admin/ui/layouts/auth/widgets/custom_links_bar.dart';
 import 'package:dashboard_admin/ui/layouts/auth/widgets/custom_title.dart';
-import 'package:flutter/material.dart';
 
 class AuthLayout extends StatelessWidget {
   //Variable que envía la vista a renderizar por medio del hijo login o register
   final Widget child;
-
-  const AuthLayout({super.key, required this.child});
+  const AuthLayout({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +43,7 @@ class _DesktopBody extends StatelessWidget {
   Widget build(BuildContext context) {
     //Se debe establecer el tamaño por que esta en el ListView
     final size = MediaQuery.of(context).size;
+
     return SizedBox(
       width: size.width,
       height: size.height * 0.95,
@@ -60,13 +61,12 @@ class _DesktopBody extends StatelessWidget {
                   Expanded(
                       flex: 1,
                       child: Container(
-                        color: const Color.fromRGBO(45, 45, 45, 1),
-                        child: Image.asset(
-                          'img/sign_in.png',
-                          width: double.infinity,
-                          height: double.infinity,
-                        ),
-                      )),
+                          color: const Color.fromRGBO(45, 45, 45, 1),
+                          child: Image.asset(
+                            'img/sign_in.png',
+                            width: double.infinity,
+                            height: double.infinity,
+                          ))),
                   Container(
                     color: const Color.fromRGBO(30, 30, 30, 1),
                     width: 450,

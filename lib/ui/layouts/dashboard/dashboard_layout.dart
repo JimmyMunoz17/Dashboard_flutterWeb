@@ -1,5 +1,6 @@
-import 'package:dashboard_admin/providers/sidemenu_provider.dart';
 import 'package:flutter/material.dart';
+
+import 'package:dashboard_admin/providers/sidemenu_provider.dart';
 
 import '../../shared/sidebar.dart';
 import 'package:dashboard_admin/ui/shared/navbar.dart';
@@ -17,7 +18,6 @@ class _DashboardLayoutState extends State<DashboardLayout>
     with SingleTickerProviderStateMixin {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     SideMenuProvider.menuController = AnimationController(
@@ -33,7 +33,7 @@ class _DashboardLayoutState extends State<DashboardLayout>
         children: [
           Row(
             children: [
-              //TODO: Menú lateral
+              //Menú lateral
               if (size.width >= 700) const Sidebar(),
               Expanded(
                 child: Column(
@@ -50,7 +50,7 @@ class _DashboardLayoutState extends State<DashboardLayout>
               )
             ],
           ),
-          //TODO: Menú lateral
+          //Menú lateral
           if (size.width < 700)
             AnimatedBuilder(
                 animation: SideMenuProvider.menuController,

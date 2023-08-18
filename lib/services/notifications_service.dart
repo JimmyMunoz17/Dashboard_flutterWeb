@@ -29,4 +29,17 @@ class NotificationsService {
     //Mostar el snackbar
     messengerKey.currentState!.showSnackBar(snackBar);
   }
+
+  static showBusyIndicator(BuildContext context) {
+    const AlertDialog dialog = AlertDialog(
+      content: SizedBox(
+        width: 100,
+        height: 100,
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+    );
+    showDialog(context: context, builder: (_) => dialog);
+  }
 }

@@ -62,7 +62,7 @@ class RegisterView extends StatelessWidget {
                                     text: "Back",
                                     icon: Icons.arrow_back_ios_new_outlined,
                                     onPressed: () {
-                                      Navigator.pushNamed(
+                                      Navigator.pushReplacementNamed(
                                           context, Flurorouter.loginRoute);
                                     },
                                   )
@@ -79,6 +79,9 @@ class RegisterView extends StatelessWidget {
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Ingrese su nombre';
+                                }
+                                if (value.length < 2) {
+                                  return 'El nombre debe tener mas de dos letras';
                                 }
                                 return null;
                               },

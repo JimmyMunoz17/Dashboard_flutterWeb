@@ -1,9 +1,9 @@
-import 'package:dashboard_admin/providers/auth_provider.dart';
-import 'package:dashboard_admin/ui/widgets/labels/custom_labels.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import 'package:dashboard_admin/ui/widgets/labels/custom_labels.dart';
+import 'package:dashboard_admin/providers/auth_provider.dart';
 import '../widgets/cards/white_card.dart';
 
 class DashboardView extends StatelessWidget {

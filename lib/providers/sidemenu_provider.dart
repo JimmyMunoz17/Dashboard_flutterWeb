@@ -7,17 +7,16 @@ class SideMenuProvider extends ChangeNotifier {
   //Página actual
   String _currentPage = '';
 
+  String get currentPage {
+    return _currentPage;
+  }
+
   void setCurrentPageUrl(String routeName) {
     _currentPage = routeName;
     //Espera hasta que se cree el widget y actuliza la página
     Future.delayed(const Duration(milliseconds: 100), () {
       notifyListeners();
     });
-  }
-
-  String get currentPage {
-    print(_currentPage);
-    return _currentPage;
   }
 
   //Animación de apertura menú
@@ -27,6 +26,7 @@ class SideMenuProvider extends ChangeNotifier {
   // Animación de cierre menú
   static Animation<double> opacity = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(parent: menuController, curve: Curves.easeInOut));
+
   //inicio animación de apertura
   static void openMenu() {
     isMenuOpen = true;

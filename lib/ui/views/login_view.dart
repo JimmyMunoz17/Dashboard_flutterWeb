@@ -1,11 +1,12 @@
-import 'package:dashboard_admin/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:dashboard_admin/router/router.dart';
+
 import 'package:dashboard_admin/providers/login_form_provider.dart';
+import 'package:dashboard_admin/providers/auth_provider.dart';
 
 import '../widgets/Inputs/custom_inputs.dart';
 import '../widgets/buttons/custom_button.dart';
@@ -63,7 +64,7 @@ class LoginView extends StatelessWidget {
                                   text: "Sign up",
                                   icon: Icons.add,
                                   onPressed: () {
-                                    Navigator.pushNamed(
+                                    Navigator.pushReplacementNamed(
                                         context, Flurorouter.registerRoute);
                                   },
                                 )

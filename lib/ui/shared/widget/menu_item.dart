@@ -27,12 +27,12 @@ class _MenuItemState extends State<MenuItem> {
     //animación del contenedor
     return AnimatedContainer(
       duration: const Duration(milliseconds: 1000),
-      color: isHovered
+      color: (isHovered)
           ? Colors.white.withOpacity(0.1)
           : widget.isActive
               ? Colors.white.withOpacity(0.1)
               : Colors.transparent,
-      //Efecto con el materia; y inkwell
+      //Efecto con el material y inkwell
       child: Material(
         color: Colors.transparent,
         child: InkWell(

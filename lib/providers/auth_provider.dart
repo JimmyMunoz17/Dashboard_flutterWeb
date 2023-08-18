@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:dashboard_admin/router/router.dart';
 
 import 'package:dashboard_admin/api/cafe_api.dart';
 import 'package:dashboard_admin/models/http/auth_response.dart';
+import 'package:dashboard_admin/models/usuario.dart';
 
 import 'package:dashboard_admin/services/local_storage.dart';
 import 'package:dashboard_admin/services/navigation_service.dart';
@@ -13,7 +13,6 @@ import 'package:dashboard_admin/services/notifications_service.dart';
 enum AuthStatus { checking, authenticated, notAuthenticated }
 
 class AuthProvider extends ChangeNotifier {
-  String? _token;
   AuthStatus authStatus = AuthStatus.checking;
   Usuario? user;
 
@@ -25,7 +24,6 @@ class AuthProvider extends ChangeNotifier {
     final data = {'correo': email, 'password': password};
     //conexión con la API
     CafeApi.httpPost('/auth/login', data).then((json) {
-      print(json);
       final authResponse = AuthResponse.fromMap(json);
       user = authResponse.usuario;
       //Autenticación de login y navegación dashboard
@@ -38,7 +36,6 @@ class AuthProvider extends ChangeNotifier {
       CafeApi.configureDio();
       notifyListeners(); // redibujar
     }).catchError((e) {
-      print('Error en: $e');
       NotificationsService.showSnackbarError('Credenciales invalidas');
     });
   }
@@ -51,7 +48,7 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       return false;
     }
-    //TODO: COMPROBACIÓN DEL JWT VÁLIDO
+    //COMPROBACIÓN DEL JWT VÁLIDO
     try {
       final response = await CafeApi.httpGet('/auth');
       final authResponse = AuthResponse.fromMap(response);
@@ -63,7 +60,6 @@ class AuthProvider extends ChangeNotifier {
       return true;
     } catch (e) {
       //si no esta autenticado
-      print(e);
       authStatus = AuthStatus.notAuthenticated;
       notifyListeners();
       return false;
@@ -79,7 +75,6 @@ class AuthProvider extends ChangeNotifier {
     };
     //conexión con la API
     CafeApi.httpPost('/usuarios', data).then((json) {
-      print(json);
       final authResponse = AuthResponse.fromMap(json);
       user = authResponse.usuario;
       //Navegación al dashboard y autenticación de registro
@@ -91,12 +86,11 @@ class AuthProvider extends ChangeNotifier {
       CafeApi.configureDio();
       notifyListeners(); // redibujar
     }).catchError((e) {
-      print('Error en: $e');
       NotificationsService.showSnackbarError('Credenciales invalidas');
     });
   }
 
-  //TODO: logout
+  //logout
   logout() {
     LocalStorage.prefs.remove('token');
     authStatus = AuthStatus.notAuthenticated;

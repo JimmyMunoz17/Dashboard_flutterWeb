@@ -1,15 +1,11 @@
 import 'package:fluro/fluro.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/auth_provider.dart';
-import 'package:dashboard_admin/providers/sidemenu_provider.dart';
+import 'package:dashboard_admin/providers/providers.dart';
+
+import 'package:dashboard_admin/ui/views/views.dart';
 
 import 'package:dashboard_admin/router/router.dart';
-
-import '../ui/views/dashboard_view.dart';
-import '../ui/views/login_view.dart';
-import 'package:dashboard_admin/ui/views/black_view.dart';
-import 'package:dashboard_admin/ui/views/icons_view.dart';
 
 //Administrador de los Handlers Dashboard
 class DashboardHandlers {
@@ -31,6 +27,7 @@ class DashboardHandlers {
   });
 
   //Dashboard Icons
+
   static Handler icons = Handler(handlerFunc: (context, parameters) {
     final authProvider = Provider.of<AuthProvider>(context!);
 
@@ -45,6 +42,50 @@ class DashboardHandlers {
       //si no esta autenticado muestra el login
       return const LoginView();
     }
+  });
+
+  //Categories view
+
+  static Handler categories = Handler(handlerFunc: (context, parameters) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    //Encargada de seleccionar la opción en el menú
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.dashboardCategoriesRoute);
+
+    if (authProvider.authStatus == AuthStatus.authenticated) {
+      return const CategoriesView();
+    } else {
+      return const LoginView();
+    }
+  });
+
+  //Users view
+
+  static Handler users = Handler(handlerFunc: (context, parameters) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.dashboardUsersRoute);
+    if (authProvider.authStatus == AuthStatus.authenticated) {
+      return const UsersView();
+    } else {
+      return const LoginView();
+    }
+  });
+
+  //User view
+
+  static Handler user = Handler(handlerFunc: (context, parameters) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.dashboardUserRoute);
+    if (authProvider.authStatus == AuthStatus.authenticated) {
+      if (parameters['uid']?.first != null) {
+        return UserView(uid: parameters['uid']!.first);
+      }
+    } else {
+      return const LoginView();
+    }
+    return null;
   });
 
   //Black view

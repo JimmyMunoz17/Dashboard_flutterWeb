@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:dashboard_admin/providers/auth_provider.dart';
-import 'package:dashboard_admin/providers/sidemenu_provider.dart';
+import 'providers/providers.dart';
 
 import 'package:dashboard_admin/router/router.dart';
 import 'package:dashboard_admin/services/local_storage.dart';
@@ -33,7 +32,10 @@ class AppState extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(lazy: false, create: (_) => AuthProvider()),
-        ChangeNotifierProvider(lazy: false, create: (_) => SideMenuProvider())
+        ChangeNotifierProvider(lazy: false, create: (_) => SideMenuProvider()),
+        ChangeNotifierProvider(create: (_) => CategoriesProvider()),
+        ChangeNotifierProvider(create: (_) => UsersProvider()),
+        ChangeNotifierProvider(create: (_) => UserFormProvider())
       ],
       child: const MyApp(),
     );

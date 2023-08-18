@@ -1,10 +1,9 @@
-import 'package:dashboard_admin/providers/auth_provider.dart';
-import 'package:dashboard_admin/ui/views/dashboard_view.dart';
 import 'package:fluro/fluro.dart';
-
-import 'package:dashboard_admin/ui/views/login_view.dart';
-import 'package:dashboard_admin/ui/views/register_view.dart';
 import 'package:provider/provider.dart';
+
+import 'package:dashboard_admin/providers/auth_provider.dart';
+
+import 'package:dashboard_admin/ui/views/views.dart';
 
 //Administrador de los Handlers Auth
 class AdminHandlers {
@@ -19,6 +18,7 @@ class AdminHandlers {
       return const DashboardView();
     }
   });
+
   //Register
   static Handler register = Handler(handlerFunc: (context, parameters) {
     final authProvider = Provider.of<AuthProvider>(context!);
@@ -30,5 +30,4 @@ class AdminHandlers {
       return const DashboardView();
     }
   });
-  //Dashboard
 }
