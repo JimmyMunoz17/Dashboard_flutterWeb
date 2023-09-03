@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Dashboard Admin',
+      title: 'Dashboard Admin | Jimmy Muñoz',
       //Configuración del Route
       initialRoute: Flurorouter.rootRoute,
       onGenerateRoute: Flurorouter.router.generator,
