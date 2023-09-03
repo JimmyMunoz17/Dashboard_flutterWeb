@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'dart:typed_data';
 
 import 'package:dashboard_admin/services/local_storage.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 //Configuración de Dio con las peticiones a la API
 class CafeApi {
@@ -9,8 +10,10 @@ class CafeApi {
 
   //Configuración de DIO
   static void configureDio() {
-    //Base de la url
-    _dio.options.baseUrl = 'http://localhost:8080/api';
+    //Base de la url Desarrollo
+    // _dio.options.baseUrl = dotenv.env['URL_DESARROLLO']!;
+    //Base de la url Producción
+    _dio.options.baseUrl = dotenv.env['URL_PRODUCCION']!;
 
     //configuración de Headers
     _dio.options.headers = {

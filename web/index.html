@@ -18,7 +18,7 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="description" content="Dashboard web Jimmy Munoz">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -29,9 +29,31 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>dashboard_admin</title>
+  <title>Dashboard web | Jimmy Muñoz</title>
   <link rel="manifest" href="manifest.json">
-
+  <!-- CSS splash -->
+  <style>
+    body{
+      background-color: 0F2027;
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+      overflow: hidden;
+    }
+    .container {
+      background: #454545;  /* fallback for old browsers */
+      background: -webkit-linear-gradient(to top, #1e1e1e, #2d2d2d, #454545);  /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to top, #1e1e1e, #2d2d2d, #454545); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      width: 100vw;
+      height: 100vh;
+      display: flex; /* Default Axis is X*/
+      justify-content: center; /* Main Axis */
+      align-items: center; /* Cross Axis */
+    }
+    .indicator{
+      width: 20vw;
+    }
+  </style>
   <script>
     // The value below is injected by flutter build, do not touch.
     var serviceWorkerVersion = null;
@@ -40,6 +62,10 @@
   <script src="flutter.js" defer></script>
 </head>
 <body>
+  <!-- carga del splash -->
+  <div id="loading_indicator" class="container">
+    <img class="indicator" src="./assets/JM.gif" />
+  </div>
   <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js

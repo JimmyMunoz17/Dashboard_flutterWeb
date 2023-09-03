@@ -26,6 +26,7 @@ class CustomInputs {
     required IconData icon,
   }) {
     return InputDecoration(
+      enabled: false,
       border: InputBorder.none,
       enabledBorder: InputBorder.none,
       hintText: hint,
