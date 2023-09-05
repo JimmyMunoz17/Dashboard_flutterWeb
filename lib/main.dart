@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'providers/providers.dart';
 
@@ -16,7 +15,7 @@ import 'package:dashboard_admin/ui/layouts/splash/splash_layout.dart';
 import 'package:dashboard_admin/api/cafe_api.dart';
 
 Future<void> main() async {
-  await dotenv.load(fileName: '.env');
+  // await dotenv.load(fileName: '.env');
   //configuración del localStorage necesario que sea de tipo async y await
   await LocalStorage.configurePrefs();
   //configuración de la API
