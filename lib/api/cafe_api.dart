@@ -13,7 +13,8 @@ class CafeApi {
     // _dio.options.baseUrl = dotenv.env['URL_DESARROLLO']!;
     //Base de la url Producción
     // _dio.options.baseUrl = dotenv.env['URL_PRODUCCION']!;
-    _dio.options.baseUrl = 'https://dashboard-admin-545j.onrender.com/api';
+    _dio.options.baseUrl =
+        'https://dashboard-admin-jimmy-munoz.onrender.com/api';
 
     //configuración de Headers
     _dio.options.headers = {
