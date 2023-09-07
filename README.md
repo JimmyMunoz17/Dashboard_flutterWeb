@@ -1,14 +1,14 @@
-<h1 align="center"> Dashboard Admin Web </h1>
+<h1 align="center"> Dashboard Web </h1>
 
 ![Dashboard web](https://github.com/JimmyMunoz17/skeleton_portfolio_web/blob/main/assets/img_readme/PortafolioWeb.png)
 
 <p align="center">
-   <a href="https://644db86a91193572f50d3779--frabjous-kashata-df1b24.netlify.app/#/home"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Portafolio web"</a>
+   <a href="https://dashboard-admin-jimmy-munoz.onrender.com/"><img src="https://media.licdn.com/dms/image/C4E0BAQEMqMDZaWQ8OA/company-logo_200_200/0/1651777963859?e=1701907200&v=beta&t=GQMEakp5Ap_XOHTh_zM2WoWYcKeUid00vMIZUiRHvxQ" width="100" height="100" alt="Dashboard web"</a>
 </p>
 <p align="center">
    <img src="https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green">
    <img src="https://img.shields.io/badge/Version-v0.1-green">
-   <img src="https://img.shields.io/badge/environment-%3E%3D2.16.1%20%3C3.0.0-brightgreen">
+   <img src="https://img.shields.io/badge/environment-%3E%3D2.19.2%20%3C3.0.0-brightgreen">
 </p>
 <p align="center">
   <h3> :mega: Dashboard web administrativo PWA, enfocado en la administración de usuarios y contenido, desarrollado con Flutter, Dark y ejecutado bajo un backend en Node. :mega:</h3>
