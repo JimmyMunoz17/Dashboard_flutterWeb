@@ -1,6 +1,6 @@
 <h1 align="center"> Dashboard Web </h1>
 
-![Dashboard web](https://github.com/JimmyMunoz17/skeleton_portfolio_web/blob/main/assets/img_readme/PortafolioWeb.png)
+![Dashboard web](https://github.com/JimmyMunoz17/Dashboard_flutterWeb/blob/main/assets/img_readme/Dashboard_mockup.jpg)
 
 <p align="center">
    <a href="https://dashboard-admin-jimmy-munoz.onrender.com/"><img src="https://media.licdn.com/dms/image/C4E0BAQEMqMDZaWQ8OA/company-logo_200_200/0/1651777963859?e=1701907200&v=beta&t=GQMEakp5Ap_XOHTh_zM2WoWYcKeUid00vMIZUiRHvxQ" width="100" height="100" alt="Dashboard web"</a>
