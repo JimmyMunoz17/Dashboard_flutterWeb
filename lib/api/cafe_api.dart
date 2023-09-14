@@ -1,7 +1,8 @@
-import 'package:dio/dio.dart';
 import 'dart:typed_data';
 
+import 'package:dio/dio.dart';
 import 'package:dashboard_admin/services/local_storage.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 //Configuración de Dio con las peticiones a la API
 class CafeApi {
@@ -10,11 +11,9 @@ class CafeApi {
   //Configuración de DIO
   static void configureDio() {
     //Base de la url Desarrollo
-    // _dio.options.baseUrl = dotenv.env['URL_DESARROLLO']!;
+    _dio.options.baseUrl = dotenv.env['URL_DESARROLLO']!;
     //Base de la url Producción
-    // _dio.options.baseUrl = dotenv.env['URL_PRODUCCION']!;
-    _dio.options.baseUrl =
-        'https://dashboard-admin-jimmy-munoz.onrender.com/api';
+    _dio.options.baseUrl = dotenv.env['URL_PRODUCCION']!;
 
     //configuración de Headers
     _dio.options.headers = {

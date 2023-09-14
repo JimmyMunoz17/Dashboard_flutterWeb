@@ -22,8 +22,8 @@ class CustomLinksBar extends StatelessWidget {
               fit: BoxFit.contain,
               child: LinkText(
                 text: 'Copyright © | Coded by Jimmy Muñoz',
-                onPressed: () => _validationUrl(
-                    'https://frabjous-kashata-df1b24.netlify.app/#/home'),
+                onPressed: () =>
+                    _validationUrl('https://jm-softwaredv.web.app/#/home'),
               ),
             ),
           ],

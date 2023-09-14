@@ -11,6 +11,8 @@
 migrate_working_dir/
 .env
 /assets/.env
+dotenv
+/assets/dotenv
 
 # IntelliJ related
 *.iml
